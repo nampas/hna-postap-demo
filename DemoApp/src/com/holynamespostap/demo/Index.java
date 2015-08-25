@@ -54,6 +54,12 @@ public class Index extends HttpServlet {
 		// page
 		strBuilder.append(htmlUtil.buildBodyHeader("tealks12"));
 
+		// Include the form for adding applications
+		strBuilder.append(htmlUtil.buildApplicationForm());
+
+		// And the form for adding application tasks
+		strBuilder.append(htmlUtil.buildTaskForm());
+
 		// Don't forget to close all the tags that were opened!
 		strBuilder.append("</body>");
 		strBuilder.append("</html>");
