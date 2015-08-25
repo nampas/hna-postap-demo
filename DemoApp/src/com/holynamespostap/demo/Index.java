@@ -1,6 +1,7 @@
 package com.holynamespostap.demo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
+import com.holynamespostap.demo.storage.StorageFactory;
 import com.holynamespostap.demo.util.HtmlUtil;
 
 /**
@@ -25,6 +28,7 @@ public class Index extends HttpServlet {
     public Index() {
         super();
         htmlUtil = new HtmlUtil();
+        StorageFactory.initializeStorage(StorageFactory.MEMORYSTORAGE);
     }
 
 	/**
@@ -54,6 +58,9 @@ public class Index extends HttpServlet {
 		// page
 		strBuilder.append(htmlUtil.buildBodyHeader("tealks12"));
 
+		// not sure if this belongs here or somewhere else
+		strBuilder.append(this.buildApplicationList());
+		
 		// Include the form for adding applications
 		strBuilder.append(htmlUtil.buildApplicationForm());
 
@@ -68,4 +75,19 @@ public class Index extends HttpServlet {
 		// body of the http response
 		response.getWriter().println(strBuilder.toString());
 	}
+
+	/**
+	 * 
+	 * @return application list HTML
+	 */
+	private String buildApplicationList() {
+		StringBuilder builder = new StringBuilder();
+		ArrayList<CollegeApplicationModel> applications = StorageFactory.GetInstance().getApplications();
+		for(CollegeApplicationModel application : applications){
+			builder.append(application.renderToHtml());
+		}
+		return builder.toString();
+	}
+	
+	
 }
