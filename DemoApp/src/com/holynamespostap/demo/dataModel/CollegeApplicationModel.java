@@ -23,7 +23,7 @@ public class CollegeApplicationModel extends AbstractDataModel {
 	
 	public CollegeApplicationModel(String collegeName, CollegeApplicationCategoryModel category, String username, String id){
 		this.id = id;
-		this.collegeName = universityName;
+		this.collegeName = collegeName;
 		this.category = category;
 		this.username = username;
 	}

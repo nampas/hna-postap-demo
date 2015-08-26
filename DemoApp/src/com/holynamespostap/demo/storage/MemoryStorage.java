@@ -45,7 +45,13 @@ public class MemoryStorage implements StorageInterface {
 
 	@Override
 	public boolean deleteApplication(CollegeApplicationModel application) {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < this.applications.size(); i++)
+		{
+			if(application.getID().equalsIgnoreCase(this.applications.get(i).getID())){
+				this.applications.remove(i);
+				return true;
+			}
+		}
 		return false;
 	}
 
