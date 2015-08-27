@@ -4,9 +4,23 @@ public class CollegeApplicationCategoryModel {
 
 	private String category;
 	private CollegeApplicationCategoryModel(String category){
-		this.category = category;
+		this.setCategory(category);
 	}
 	
+	/**
+	 * @return the category
+	 */
+	public String getCategory() {
+		return category;
+	}
+
+	/**
+	 * @param category the category to set
+	 */
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public static CollegeApplicationCategoryModel GetCategory(String category)
 	{
 		if(category.equalsIgnoreCase("MATCH"))

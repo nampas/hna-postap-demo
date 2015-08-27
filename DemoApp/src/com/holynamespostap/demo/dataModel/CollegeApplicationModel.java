@@ -60,6 +60,10 @@ public class CollegeApplicationModel extends AbstractDataModel {
 		taskList.add(task);
 	}
 	
+	public ArrayList<CollegeApplicationTaskModel> getTasks(){
+		return taskList;
+	}
+	
 	public String getCollegeName() {
 		return collegeName;
 	}
