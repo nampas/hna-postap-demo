@@ -20,6 +20,20 @@ public class MemoryStorage implements StorageInterface {
 	public ArrayList<CollegeApplicationModel> getApplications() {
 		return this.applications;
 	}
+	
+	@Override
+	public ArrayList<CollegeApplicationModel> getApplications(String username) {
+		
+		ArrayList<CollegeApplicationModel> filteredApp = new ArrayList<CollegeApplicationModel>();
+		for(int i = 0; i < this.applications.size(); i++)
+		{
+			if(applications.get(i).getUsername().equalsIgnoreCase(username)){
+				filteredApp.add(applications.get(i));
+			}
+		}
+		
+		return filteredApp;
+	}
 
 	@Override
 	public boolean updateApplication(CollegeApplicationModel application) {

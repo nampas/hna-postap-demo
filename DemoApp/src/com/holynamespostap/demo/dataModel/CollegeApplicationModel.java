@@ -27,6 +27,12 @@ public class CollegeApplicationModel extends AbstractDataModel {
 		this.category = category;
 		this.username = username;
 	}
+	
+	public CollegeApplicationModel(String collegeName, CollegeApplicationCategoryModel category, String username){
+		this.collegeName = collegeName;
+		this.category = category;
+		this.username = username;
+	}
 		
 	public CollegeApplicationCategoryModel getCategory() {
 		return category;
@@ -84,6 +90,26 @@ public class CollegeApplicationModel extends AbstractDataModel {
 	public String renderToHtml() {
 		return "<h3>This is an application</h3>";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (obj == null) {
+	        return false;
+	    }
+	    if (getClass() != obj.getClass()) {
+	        return false;
+	    }
+	    final CollegeApplicationModel other = (CollegeApplicationModel) obj;
+	    if ((this.id == null) ? (other.id != null) : !this.id.equalsIgnoreCase(other.id)) {
+	        return false;
+	    }
 
+	    return true;
+	}
+
+	@Override
+	public int hashCode() {
+	    return this.id.hashCode();
+	}
 
 }

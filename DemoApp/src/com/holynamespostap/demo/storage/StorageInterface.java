@@ -16,6 +16,8 @@ public interface StorageInterface {
 
 	public ArrayList<CollegeApplicationModel> getApplications();
 	
+	public ArrayList<CollegeApplicationModel> getApplications(String username);
+	
 	public boolean updateApplication(CollegeApplicationModel application);
 	
 	/**

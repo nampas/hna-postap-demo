@@ -17,7 +17,7 @@ public class StorageFactory {
 	public static void initializeStorage(String storageType)
 	{
 		if(storageType.equalsIgnoreCase(CLOUDSTORAGE)){
-			//TODO add azure code
+			storageInstance = new CloudStorage();
 		}
 		else if(storageType.equalsIgnoreCase(MEMORYSTORAGE)){
 			storageInstance = new MemoryStorage();
