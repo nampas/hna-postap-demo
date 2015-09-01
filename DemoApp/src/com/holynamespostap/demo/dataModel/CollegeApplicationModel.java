@@ -7,7 +7,7 @@ import com.holynamespostap.demo.storage.StorageFactory;
 
 /**
  * Represents a college application
- * 
+ *
  * @author Nathan P
  *
  */
@@ -20,20 +20,20 @@ public class CollegeApplicationModel extends AbstractDataModel {
 	private Date applicationDueDate;
 	private String username;
 	private boolean admitted = false;
-	
+
 	public CollegeApplicationModel(String collegeName, CollegeApplicationCategoryModel category, String username, String id){
 		this.id = id;
 		this.collegeName = collegeName;
 		this.category = category;
 		this.username = username;
 	}
-	
+
 	public CollegeApplicationModel(String collegeName, CollegeApplicationCategoryModel category, String username){
 		this.collegeName = collegeName;
 		this.category = category;
 		this.username = username;
 	}
-		
+
 	public CollegeApplicationCategoryModel getCategory() {
 		return category;
 	}
@@ -65,11 +65,11 @@ public class CollegeApplicationModel extends AbstractDataModel {
 	public void addTask(CollegeApplicationTaskModel task){
 		taskList.add(task);
 	}
-	
+
 	public ArrayList<CollegeApplicationTaskModel> getTasks(){
 		return taskList;
 	}
-	
+
 	public String getCollegeName() {
 		return collegeName;
 	}
@@ -77,20 +77,20 @@ public class CollegeApplicationModel extends AbstractDataModel {
 	public String getID() {
 		return this.id;
 	}
-	
+
 	/**
-	 * not sure whether we should just save on every setting on each property 
+	 * not sure whether we should just save on every setting on each property
 	 * or just have an explicit save method
 	 */
 	public void save(){
-		StorageFactory.GetInstance().updateApplication(this);
+		StorageFactory.getInstance().updateApplication(this);
 	}
-	
+
 	@Override
 	public String renderToHtml() {
 		return "<h3>This is an application</h3>";
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 	    if (obj == null) {

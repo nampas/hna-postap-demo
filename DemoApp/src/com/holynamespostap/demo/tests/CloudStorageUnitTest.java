@@ -1,6 +1,8 @@
 package com.holynamespostap.demo.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,18 +12,21 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.holynamespostap.demo.dataModel.*;
-import com.holynamespostap.demo.storage.*;
+import com.holynamespostap.demo.dataModel.CollegeApplicationCategoryModel;
+import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
+import com.holynamespostap.demo.dataModel.CollegeApplicationTaskModel;
+import com.holynamespostap.demo.storage.StorageFactory;
+import com.holynamespostap.demo.storage.StorageInterface;
 
 public class CloudStorageUnitTest {
 
 	private static StorageInterface storage;
 	private static ArrayList<CollegeApplicationModel> appsAdded;
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		StorageFactory.initializeStorage(StorageFactory.CLOUDSTORAGE);
-        storage = StorageFactory.GetInstance();
+        storage = StorageFactory.getInstance();
         appsAdded = new ArrayList<CollegeApplicationModel>();
 	}
 
@@ -62,7 +67,7 @@ public class CloudStorageUnitTest {
 		assertNotNull(newApp);
 		assertNotNull(newApp.getTasks());
 	}
-	
+
 	/**
 	 * Test method for {@link com.holynamespostap.demo.storage.CloudStorage#updateApplication(com.holynamespostap.demo.dataModel.CollegeApplicationModel)}.
 	 */
@@ -87,7 +92,7 @@ public class CloudStorageUnitTest {
 		CollegeApplicationModel app2 = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
 		appsAdded.add(app1);
 		appsAdded.add(app2);
-		
+
 		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
 		assertTrue(apps.contains(app1));
 		assertTrue(apps.contains(app2));

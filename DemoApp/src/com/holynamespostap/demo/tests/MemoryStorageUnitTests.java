@@ -1,35 +1,41 @@
 /**
- * 
+ *
  */
 package com.holynamespostap.demo.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
-import com.holynamespostap.demo.dataModel.*;
-import com.holynamespostap.demo.storage.*;
+import com.holynamespostap.demo.dataModel.CollegeApplicationCategoryModel;
+import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
+import com.holynamespostap.demo.dataModel.CollegeApplicationTaskModel;
+import com.holynamespostap.demo.storage.StorageFactory;
+import com.holynamespostap.demo.storage.StorageInterface;
 
 /**
  * @author alcheng
  *
  */
 public class MemoryStorageUnitTests {
-	
+
 	private StorageInterface storage;
-	
+
     @Before
     public void setUp() {
         StorageFactory.initializeStorage(StorageFactory.MEMORYSTORAGE);
-        storage = StorageFactory.GetInstance();
+        storage = StorageFactory.getInstance();
     }
 
-	
+
 	/**
 	 * Test method for {@link com.holynamespostap.demo.storage.MemoryStorage#getApplications()}.
 	 */
@@ -58,7 +64,7 @@ public class MemoryStorageUnitTests {
 		assertNotNull(newApp);
 		assertNotNull(newApp.getTasks());
 	}
-	
+
 	/**
 	 * Test method for {@link com.holynamespostap.demo.storage.MemoryStorage#updateApplication(com.holynamespostap.demo.dataModel.CollegeApplicationModel)}.
 	 */

@@ -52,10 +52,10 @@ public class HtmlUtil {
 	 *
 	 * @return exactly that ^
 	 */
-	public String buildApplicationForm() {
+	public String buildApplicationForm(String username) {
 		return new StringBuilder()
 			.append("<h3>Please enter a new college application</h3>")
-			.append("<form>")
+			.append("<form action=\"/college-application\" method=\"post\">")
 				.append("College Name: <input type=\"text\" name=\"CollegeName\">")
 				.append("<br>")
 				.append("School Type: <select name=\"School_Type\">")
@@ -77,7 +77,7 @@ public class HtmlUtil {
 	 * Renders out the task form, which looks like:
 	 *
 	 * 	<h3>Please Input Task details...</h3>
-	 * 	<form>
+	 * 	<form action="/college-application-task" method="post">
 	 * 		Task: <input type="text" name="TaskInfo">
 	 * 		<br>
 	 * 		Due Date: <input type="text" name="DueDate">
@@ -87,10 +87,10 @@ public class HtmlUtil {
 	 *
 	 * @return precisely that ^
 	 */
-	public String buildTaskForm() {
+	public String buildTaskForm(String username) {
 		return new StringBuilder()
 			.append("<h3>Please Input Task details...</h3>")
-			.append("<form>")
+			.append("<form action=\"/college-application-task\" method=\"post\">")
 				.append("Task: <input type=\"text\" name=\"TaskInfo\">")
 				.append("<br>")
 				.append("Due Date: <input type=\"text\" name=\"DueDate\">")

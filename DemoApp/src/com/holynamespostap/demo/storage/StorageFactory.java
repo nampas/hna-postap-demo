@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.holynamespostap.demo.storage;
 
@@ -9,13 +9,12 @@ package com.holynamespostap.demo.storage;
  */
 public class StorageFactory {
 
-	public static String CLOUDSTORAGE = "CLOUD";
-	public static String MEMORYSTORAGE = "MEMORY";
-	
+	public static final String CLOUDSTORAGE = "CLOUD";
+	public static final String MEMORYSTORAGE = "MEMORY";
+
 	private static StorageInterface storageInstance = null;
-	
-	public static void initializeStorage(String storageType)
-	{
+
+	public static void initializeStorage(String storageType) {
 		if(storageType.equalsIgnoreCase(CLOUDSTORAGE)){
 			storageInstance = new CloudStorage();
 		}
@@ -23,8 +22,8 @@ public class StorageFactory {
 			storageInstance = new MemoryStorage();
 		}
 	}
-	
-	public static StorageInterface GetInstance(){
+
+	public static StorageInterface getInstance() {
 		return storageInstance;
 	}
 }

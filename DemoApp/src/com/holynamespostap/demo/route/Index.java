@@ -1,4 +1,4 @@
-package com.holynamespostap.demo;
+package com.holynamespostap.demo.route;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
 import com.holynamespostap.demo.storage.StorageFactory;
+import com.holynamespostap.demo.util.AppSettings;
 import com.holynamespostap.demo.util.HtmlUtil;
 
 /**
@@ -28,7 +29,7 @@ public class Index extends HttpServlet {
     public Index() {
         super();
         htmlUtil = new HtmlUtil();
-        StorageFactory.initializeStorage(StorageFactory.MEMORYSTORAGE);
+        StorageFactory.initializeStorage(AppSettings.STORAGE_METHOD);
     }
 
 	/**
@@ -36,10 +37,13 @@ public class Index extends HttpServlet {
 	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    @Override
 	protected void doGet(HttpServletRequest request,
 						HttpServletResponse response) throws ServletException,
 															IOException
 	{
+    	String username = "tealsk12";
+
 		StringBuilder strBuilder = new StringBuilder();
 
 		// Open up the HTML document with correct identifier
@@ -56,16 +60,16 @@ public class Index extends HttpServlet {
 
 		// Include the header. This is the content we'll put at the top of the
 		// page
-		strBuilder.append(htmlUtil.buildBodyHeader("tealks12"));
+		strBuilder.append(htmlUtil.buildBodyHeader(username));
 
 		// not sure if this belongs here or somewhere else
 		strBuilder.append(this.buildApplicationList());
-		
+
 		// Include the form for adding applications
-		strBuilder.append(htmlUtil.buildApplicationForm());
+		strBuilder.append(htmlUtil.buildApplicationForm(username));
 
 		// And the form for adding application tasks
-		strBuilder.append(htmlUtil.buildTaskForm());
+		strBuilder.append(htmlUtil.buildTaskForm(username));
 
 		// Don't forget to close all the tags that were opened!
 		strBuilder.append("</body>");
@@ -77,17 +81,17 @@ public class Index extends HttpServlet {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return application list HTML
 	 */
 	private String buildApplicationList() {
 		StringBuilder builder = new StringBuilder();
-		ArrayList<CollegeApplicationModel> applications = StorageFactory.GetInstance().getApplications();
+		ArrayList<CollegeApplicationModel> applications = StorageFactory.getInstance().getApplications();
 		for(CollegeApplicationModel application : applications){
 			builder.append(application.renderToHtml());
 		}
 		return builder.toString();
 	}
-	
-	
+
+
 }

@@ -1,31 +1,37 @@
 /**
- * 
+ *
  */
 package com.holynamespostap.demo.storage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
 import com.holynamespostap.demo.dataModel.CollegeApplicationCategoryModel;
 import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
-import com.microsoft.azure.documentdb.*;
+import com.microsoft.azure.documentdb.ConnectionPolicy;
+import com.microsoft.azure.documentdb.ConsistencyLevel;
+import com.microsoft.azure.documentdb.Database;
+import com.microsoft.azure.documentdb.Document;
+import com.microsoft.azure.documentdb.DocumentClient;
+import com.microsoft.azure.documentdb.DocumentClientException;
+import com.microsoft.azure.documentdb.DocumentCollection;
+import com.microsoft.azure.documentdb.RequestOptions;
 
 /**
  * @author alcheng
  *
  */
-public class CloudStorage implements StorageInterface{
+public class CloudStorage implements StorageInterface {
 
 	private static final String HOST = "https://hnapostap20152016.documents.azure.com:443/";
 	private static final String MASTER_KEY = "d9Ps6ydkWHwd2X4hSX19VPOKssiNkyRn+1xxxOXXPVlDv4+1QXrCxrlqkgXUp6b07+p62Lz2QK0bUGk78xTSeA==";;
 	private static final String DATABASE_ID = "collegeapplicationdemodb";
 	private static final String COLLECTION_ID = "applications";
 	private static final String APPLICATION_ENTITY_NAME = "CollegeApplication";
-	
+
 	// Cache for documentClient object
 	private static DocumentClient documentClient;
-	
+
 	// Cache for the database object, so we don't have to query for it to
     // retrieve self links.
     private static Database database;
@@ -33,7 +39,7 @@ public class CloudStorage implements StorageInterface{
     // Cache for the collection object, so we don't have to query for it to
     // retrieve self links.
     private static DocumentCollection applicationCollection;
-    
+
     private static Gson gson = new Gson();
 
 	public CloudStorage(){
@@ -41,15 +47,15 @@ public class CloudStorage implements StorageInterface{
 	        documentClient = new DocumentClient(HOST, MASTER_KEY,
 	                ConnectionPolicy.GetDefault(), ConsistencyLevel.Session);
 	    }
-	    
+
 	    database = this.initializeDatabase();
 	    applicationCollection = this.initializeApplicationCollection();
 	}
-	
-	
+
+
 	@Override
 	public ArrayList<CollegeApplicationModel> getApplications() {
-		
+
 		ArrayList<CollegeApplicationModel> apps = new ArrayList<CollegeApplicationModel>();
 		 // Retrieve the CollegeApplicationModel documents
 	    List<Document> documentList = documentClient
@@ -65,12 +71,12 @@ public class CloudStorage implements StorageInterface{
 
 	    return apps;
 	}
-	
+
 	@Override
 	public ArrayList<CollegeApplicationModel> getApplications(String username) {
-		
+
 		ArrayList<CollegeApplicationModel> allApplications = this.getApplications();
-		
+
 		ArrayList<CollegeApplicationModel> filteredApp = new ArrayList<CollegeApplicationModel>();
 		for(int i = 0; i < allApplications.size(); i++)
 		{
@@ -78,7 +84,7 @@ public class CloudStorage implements StorageInterface{
 				filteredApp.add(allApplications.get(i));
 			}
 		}
-		
+
 		return filteredApp;
 	}
 
@@ -89,11 +95,11 @@ public class CloudStorage implements StorageInterface{
 	    if(appDoc == null){
 	    	return false;
 	    }
-	    
+
 	    Document updatedDoc = new Document(gson.toJson(application));
 
 	    updatedDoc.set("entityType", APPLICATION_ENTITY_NAME);
-	    
+
 	    try {
 	        // Persist/replace the updated document.
 	        documentClient.replaceDocument(appDoc.getSelfLink(), updatedDoc,
@@ -109,7 +115,7 @@ public class CloudStorage implements StorageInterface{
 	@Override
 	public CollegeApplicationModel addApplication(String university, CollegeApplicationCategoryModel category,
 			String username) {
-		
+
 		CollegeApplicationModel app = new CollegeApplicationModel(university, category, username);
 		Document appDoc = new Document(gson.toJson(app));
 
@@ -144,14 +150,14 @@ public class CloudStorage implements StorageInterface{
 
 	    return true;
 	}
-	
+
 	public void deleteAllApplications(){
 		ArrayList<CollegeApplicationModel> apps = this.getApplications();
 		for(int i = 0; i < apps.size(); i++){
 			this.deleteApplication(apps.get(i));
 		}
 	}
-	
+
     private Database initializeDatabase() {
         if (database == null) {
             // Get the database if it exists
@@ -183,7 +189,7 @@ public class CloudStorage implements StorageInterface{
 		} catch (DocumentClientException e) {
 		    e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
@@ -227,7 +233,7 @@ public class CloudStorage implements StorageInterface{
 		    // Verify your connection, endpoint, and key.
 		    e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
@@ -245,7 +251,7 @@ public class CloudStorage implements StorageInterface{
 	        return null;
 	    }
 	}
-	
+
 	private CollegeApplicationModel getApplicationById(String id) {
 	    // Retrieve the document by id using our helper method.
 	    Document appDocument = getDocumentById(id);
