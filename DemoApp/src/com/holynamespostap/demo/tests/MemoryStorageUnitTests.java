@@ -41,7 +41,7 @@ public class MemoryStorageUnitTests {
 	 */
 	@Test
 	public void testGetApplications() {
-		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
+		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
 		assertTrue(apps.contains(app));
 	}
@@ -51,7 +51,7 @@ public class MemoryStorageUnitTests {
 	 */
 	@Test
 	public void testUpdateApplication() {
-		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
+		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		CollegeApplicationTaskModel task = new CollegeApplicationTaskModel("myTask");
 		Calendar calendar = new GregorianCalendar(2015,9,16);
 		task.setDueDate(calendar.getTime());
@@ -70,7 +70,7 @@ public class MemoryStorageUnitTests {
 	 */
 	@Test
 	public void testUpdateApplicationAfterDelete() {
-		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
+		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		assertTrue(storage.deleteApplication(app));
 		CollegeApplicationTaskModel task = new CollegeApplicationTaskModel("myTask");
 		Calendar calendar = new GregorianCalendar(2015,9,16);
@@ -85,8 +85,8 @@ public class MemoryStorageUnitTests {
 	 */
 	@Test
 	public void testAddApplication() {
-		storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
-		storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
+		storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
+		storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
 		assertEquals(2, apps.size());
 	}
@@ -96,7 +96,7 @@ public class MemoryStorageUnitTests {
 	 */
 	@Test
 	public void testDeleteApplication() {
-		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
+		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		boolean deleted = storage.deleteApplication(app);
 		assertTrue(deleted);
 		ArrayList<CollegeApplicationModel> apps = storage.getApplications();

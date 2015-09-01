@@ -53,6 +53,6 @@ public class CollegeApplicationTaskRoute extends HttpServlet {
 						HttpServletResponse response) throws ServletException,
 															IOException
 	{
-		// Nothing really to do here
+
 	}
 }

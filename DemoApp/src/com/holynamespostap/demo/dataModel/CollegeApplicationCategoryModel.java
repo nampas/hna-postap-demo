@@ -6,7 +6,7 @@ public class CollegeApplicationCategoryModel {
 	private CollegeApplicationCategoryModel(String category){
 		this.setCategory(category);
 	}
-	
+
 	/**
 	 * @return the category
 	 */
@@ -21,7 +21,7 @@ public class CollegeApplicationCategoryModel {
 		this.category = category;
 	}
 
-	public static CollegeApplicationCategoryModel GetCategory(String category)
+	public static CollegeApplicationCategoryModel getCategory(String category)
 	{
 		if(category.equalsIgnoreCase("MATCH"))
 			return new CollegeApplicationCategoryModel("MATCH");
@@ -29,7 +29,7 @@ public class CollegeApplicationCategoryModel {
 			return new CollegeApplicationCategoryModel("SAFETY");
 		else if(category.equalsIgnoreCase("REACH"))
 			return new CollegeApplicationCategoryModel("REACH");
-			
+
 		return null;
 	}
 }

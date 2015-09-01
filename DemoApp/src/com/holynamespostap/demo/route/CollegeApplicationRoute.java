@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.holynamespostap.demo.dataModel.CollegeApplicationCategoryModel;
 import com.holynamespostap.demo.storage.StorageFactory;
+import com.holynamespostap.demo.storage.StorageInterface;
 import com.holynamespostap.demo.util.AppSettings;
 import com.holynamespostap.demo.util.HtmlUtil;
 
@@ -44,7 +46,7 @@ public class CollegeApplicationRoute extends HttpServlet {
 	}
 
 	/**
-	 * Executed when a client issues an Http GET to /college-application
+	 * Executed when a client issues an Http POST to /college-application
 	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -53,7 +55,28 @@ public class CollegeApplicationRoute extends HttpServlet {
 						HttpServletResponse response) throws ServletException,
 															IOException
 	{
-		// Nothing really to do here
+    	// Pull the data out of the request
+		String collegeName = request.getParameter("collegeName");
+		String schoolType = request.getParameter("schoolType");
+		String addmitted = request.getParameter("admitted");
+		String dueDate = request.getParameter("dueDate");
+		String username = request.getParameter("username");
+
+		// Instantiate a new data model with the information from the request
+//		CollegeApplicationModel applicatioModel = new CollegeApplicationModel(
+//			collegeName,
+//			CollegeApplicationCategoryModel.getCategory(schoolType),
+//			username);
+
+		// Get the storage object and save the data
+		StorageInterface storage = StorageFactory.getInstance();
+		storage.addApplication(
+			collegeName,
+			CollegeApplicationCategoryModel.getCategory(schoolType),
+			username
+		);
+
+		// TODO redirect
 	}
 
 
