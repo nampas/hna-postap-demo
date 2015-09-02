@@ -15,6 +15,8 @@ public class StorageFactory {
 	private static StorageInterface storageInstance = null;
 
 	public static void initializeStorage(String storageType) {
+		if(storageInstance != null) return;
+
 		if(storageType.equalsIgnoreCase(CLOUDSTORAGE)){
 			storageInstance = new CloudStorage();
 		}

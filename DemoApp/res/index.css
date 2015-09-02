@@ -1,6 +1,7 @@
 .header {
-	background-color: #5CB85C;
+	background-color: #5B4282;
 	padding: 10px;
+	color: #fff;
 }
 
 .username {
@@ -23,6 +24,25 @@ form > .btn {
 	margin-top: 10px;
 }
 
+.application-form {
+	margin-bottom: 20px;
+}
+
 .application > .tasks {
 	padding: 10px;
+}
+
+.task-form-wrapper, .application-summary {
+	display: inline-block;
+}
+
+.task-form-wrapper {
+	margin-left: 30px;
+}
+
+.bg-color-1 {
+	background-color: #FFF7E6;
+}
+
+.bg-color-2 {
 }

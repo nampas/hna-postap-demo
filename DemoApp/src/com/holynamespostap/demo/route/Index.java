@@ -89,19 +89,29 @@ public class Index extends HttpServlet {
 		List<CollegeApplicationModel> applications
 						= StorageFactory.getInstance().getApplications(username);
 
-		for(CollegeApplicationModel application : applications){
-			builder.append("<div class=\"application content-padding\">")
-					.append(application.renderToHtml())
+		for(int i = 0; i < applications.size(); i++) {
+			CollegeApplicationModel application = applications.get(i);
+
+			String classes = "application content-padding ";
+			if(i % 2 == 0) classes += "bg-color-1";
+			else classes += "bg-color-2";
+
+			builder.append("<div class=\"" + classes + "\">")
+					.append("<span class=\"application-summary\">")
+						.append(application.renderToHtml())
+					.append("</span>")
+					.append("<span class=\"task-form-wrapper\">")
+						.append(htmlUtil.buildTaskForm(username, application.getCollegeName()))
+					.append("</span>")
 					.append("<div class=\"tasks\">")
 						.append("<h4>Tasks</h4>");
 			for(CollegeApplicationTaskModel task : application.getTasks()) {
 				builder.append(task.renderToHtml());
 			}
 
-			// And the form for adding application tasks
-			builder.append(htmlUtil.buildTaskForm(username, application.getCollegeName()))
-					.append("</div>") // close the tasks div
-					.append("</div>"); // close the application div
+			builder.append("</div>") // close the tasks div
+					.append("</span>") // close the application span
+					.append("</div>"); // close the wrapper span
 		}
 
 		return builder.toString();
