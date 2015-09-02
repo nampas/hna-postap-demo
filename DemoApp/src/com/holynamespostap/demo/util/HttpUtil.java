@@ -1,8 +1,11 @@
 package com.holynamespostap.demo.util;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
-public class HttpRequestUtil {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class HttpUtil {
 
 	public static String extractUsernameFromRequest(HttpServletRequest request) {
 		String requestUrl = request.getRequestURL().toString();
@@ -23,5 +26,11 @@ public class HttpRequestUtil {
 		}
 
 		return requestUrl;
+	}
+
+	public static void redirectToIndex(HttpServletResponse response,
+										String username) throws IOException
+	{
+		response.sendRedirect("/user/" + username);
 	}
 }

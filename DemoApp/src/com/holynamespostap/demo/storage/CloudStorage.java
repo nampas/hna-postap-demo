@@ -55,7 +55,7 @@ public class CloudStorage implements StorageInterface {
 
 
 	@Override
-	public ArrayList<CollegeApplicationModel> getApplications() {
+	public List<CollegeApplicationModel> getApplications() {
 
 		ArrayList<CollegeApplicationModel> apps = new ArrayList<CollegeApplicationModel>();
 		 // Retrieve the CollegeApplicationModel documents
@@ -74,11 +74,11 @@ public class CloudStorage implements StorageInterface {
 	}
 
 	@Override
-	public ArrayList<CollegeApplicationModel> getApplications(String username) {
+	public List<CollegeApplicationModel> getApplications(String username) {
 
-		ArrayList<CollegeApplicationModel> allApplications = this.getApplications();
+		List<CollegeApplicationModel> allApplications = this.getApplications();
 
-		ArrayList<CollegeApplicationModel> filteredApp = new ArrayList<CollegeApplicationModel>();
+		List<CollegeApplicationModel> filteredApp = new ArrayList<CollegeApplicationModel>();
 		for(int i = 0; i < allApplications.size(); i++)
 		{
 			if(allApplications.get(i).getUsername().equalsIgnoreCase(username)){
@@ -153,7 +153,7 @@ public class CloudStorage implements StorageInterface {
 	}
 
 	public void deleteAllApplications(){
-		ArrayList<CollegeApplicationModel> apps = this.getApplications();
+		List<CollegeApplicationModel> apps = this.getApplications();
 		for(int i = 0; i < apps.size(); i++){
 			this.deleteApplication(apps.get(i));
 		}

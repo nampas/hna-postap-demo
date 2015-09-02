@@ -4,6 +4,7 @@
 package com.holynamespostap.demo.storage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.holynamespostap.demo.dataModel.CollegeApplicationCategoryModel;
 import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
@@ -17,7 +18,7 @@ public class MemoryStorage implements StorageInterface {
 	private ArrayList<CollegeApplicationModel> applications = new ArrayList<CollegeApplicationModel>();
 
 	@Override
-	public ArrayList<CollegeApplicationModel> getApplications() {
+	public List<CollegeApplicationModel> getApplications() {
 		return this.applications;
 	}
 

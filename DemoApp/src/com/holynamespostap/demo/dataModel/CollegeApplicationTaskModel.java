@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * Represents a task for a college application
- * 
+ *
  * @author Nathan P
  *
  */
@@ -14,11 +14,11 @@ public class CollegeApplicationTaskModel extends AbstractDataModel {
 	private Date completedDate;
 	private String name;
 	private String note;
-	
+
 	public CollegeApplicationTaskModel(String name){
 		this.setName(name);
 	}
-	
+
 	/**
 	 * @return the note
 	 */
@@ -77,7 +77,16 @@ public class CollegeApplicationTaskModel extends AbstractDataModel {
 
 	@Override
 	public String renderToHtml() {
-		return "<h3>This is a task</h3>";
+		StringBuilder strBuilder = new StringBuilder()
+			.append("<h4>" + name + "</h4>")
+			.append("<p>Due Date: " + dueDate.toString() + "</p>")
+			.append("<p>Completed Date: " + completedDate.toString() + "</p>");
+
+		if(note != null && !note.isEmpty()) {
+			strBuilder.append("<p>" + note + "</p>");
+		}
+
+		return strBuilder.toString();
 	}
 
 }

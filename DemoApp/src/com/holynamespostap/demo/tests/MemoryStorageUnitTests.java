@@ -8,9 +8,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class MemoryStorageUnitTests {
 	@Test
 	public void testGetApplications() {
 		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
-		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
+		List<CollegeApplicationModel> apps = storage.getApplications();
 		assertTrue(apps.contains(app));
 	}
 
@@ -58,7 +58,7 @@ public class MemoryStorageUnitTests {
 		app.addTask(task);
 		boolean updated = storage.updateApplication(app);
 		assertTrue(updated);
-		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
+		List<CollegeApplicationModel> apps = storage.getApplications();
 		assertTrue(apps.contains(app));
 		CollegeApplicationModel newApp = apps.get(apps.indexOf(app));
 		assertNotNull(newApp);
@@ -87,7 +87,7 @@ public class MemoryStorageUnitTests {
 	public void testAddApplication() {
 		storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
-		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
+		List<CollegeApplicationModel> apps = storage.getApplications();
 		assertEquals(2, apps.size());
 	}
 
@@ -99,7 +99,7 @@ public class MemoryStorageUnitTests {
 		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		boolean deleted = storage.deleteApplication(app);
 		assertTrue(deleted);
-		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
+		List<CollegeApplicationModel> apps = storage.getApplications();
 		assertEquals(0, apps.size());
 	}
 

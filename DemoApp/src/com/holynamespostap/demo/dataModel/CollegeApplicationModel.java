@@ -88,7 +88,11 @@ public class CollegeApplicationModel extends AbstractDataModel {
 
 	@Override
 	public String renderToHtml() {
-		return "<h4>This is an application for " + collegeName + "</h4>";
+		return new StringBuilder()
+			.append("<h4>" + collegeName + "</h4>")
+			.append("<p>Category: " + category.getCategory() + "</p>")
+			.append("<p>Admitted: " + admitted + "</p>")
+			.toString();
 	}
 
 	@Override

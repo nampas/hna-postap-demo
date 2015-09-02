@@ -91,10 +91,13 @@ public class HtmlUtil {
 	 *
 	 * @return precisely that ^
 	 */
-	public String buildTaskForm(String username) {
+	public String buildTaskForm(String username, String schoolName) {
+		String postUrl = "/college-application-task/" + username
+							+ "?schoolName=" + schoolName;
+
 		return new StringBuilder()
 			.append("<h3>Please Input Task details...</h3>")
-			.append("<form action=\"/college-application-task/" + username + "\" method=\"post\">")
+			.append("<form action=\"" + postUrl + "\" method=\"post\">")
 				.append("Task: <input type=\"text\" name=\"taskInfo\">")
 				.append("<br>")
 				.append("Due Date: <input type=\"text\" name=\"dueDate\">")

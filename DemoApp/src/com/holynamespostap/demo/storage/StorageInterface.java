@@ -3,7 +3,7 @@
  */
 package com.holynamespostap.demo.storage;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.holynamespostap.demo.dataModel.CollegeApplicationCategoryModel;
 import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
@@ -14,9 +14,9 @@ import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
  */
 public interface StorageInterface {
 
-	public ArrayList<CollegeApplicationModel> getApplications();
+	public List<CollegeApplicationModel> getApplications();
 
-	public ArrayList<CollegeApplicationModel> getApplications(String username);
+	public List<CollegeApplicationModel> getApplications(String username);
 
 	public boolean updateApplication(CollegeApplicationModel application);
 

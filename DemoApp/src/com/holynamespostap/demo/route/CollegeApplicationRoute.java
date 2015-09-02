@@ -13,7 +13,7 @@ import com.holynamespostap.demo.storage.StorageFactory;
 import com.holynamespostap.demo.storage.StorageInterface;
 import com.holynamespostap.demo.util.AppSettings;
 import com.holynamespostap.demo.util.HtmlUtil;
-import com.holynamespostap.demo.util.HttpRequestUtil;
+import com.holynamespostap.demo.util.HttpUtil;
 
 /**
  * Servlet implementation class
@@ -62,13 +62,7 @@ public class CollegeApplicationRoute extends HttpServlet {
 		String addmitted = request.getParameter("admitted");
 		String dueDate = request.getParameter("dueDate");
 
-		String username = HttpRequestUtil.extractUsernameFromRequest(request);
-
-		// Instantiate a new data model with the information from the request
-//		CollegeApplicationModel applicatioModel = new CollegeApplicationModel(
-//			collegeName,
-//			CollegeApplicationCategoryModel.getCategory(schoolType),
-//			username);
+		String username = HttpUtil.extractUsernameFromRequest(request);
 
 		// Get the storage object and save the data
 		StorageInterface storage = StorageFactory.getInstance();
@@ -80,7 +74,7 @@ public class CollegeApplicationRoute extends HttpServlet {
 
 		// Redirect back to the main page. The client will reload and render
 		// this user's new content
-		response.sendRedirect("/user/" + username);
+		HttpUtil.redirectToIndex(response, username);
 	}
 
 

@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -21,7 +22,7 @@ import com.holynamespostap.demo.storage.StorageInterface;
 public class CloudStorageUnitTest {
 
 	private static StorageInterface storage;
-	private static ArrayList<CollegeApplicationModel> appsAdded;
+	private static List<CollegeApplicationModel> appsAdded;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -42,9 +43,9 @@ public class CloudStorageUnitTest {
 	 */
 	@Test
 	public void testGetApplications() {
-		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
+		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		appsAdded.add(app);
-		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
+		List<CollegeApplicationModel> apps = storage.getApplications();
 		assertTrue(apps.contains(app));
 	}
 
@@ -53,7 +54,7 @@ public class CloudStorageUnitTest {
 	 */
 	@Test
 	public void testUpdateApplication() {
-		CollegeApplicationModel app = storage.addApplication("updateUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
+		CollegeApplicationModel app = storage.addApplication("updateUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		appsAdded.add(app);
 		CollegeApplicationTaskModel task = new CollegeApplicationTaskModel("myTask");
 		Calendar calendar = new GregorianCalendar(2015,9,16);
@@ -61,7 +62,7 @@ public class CloudStorageUnitTest {
 		app.addTask(task);
 		boolean updated = storage.updateApplication(app);
 		assertTrue(updated);
-		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
+		List<CollegeApplicationModel> apps = storage.getApplications();
 		assertTrue(apps.contains(app));
 		CollegeApplicationModel newApp = apps.get(apps.indexOf(app));
 		assertNotNull(newApp);
@@ -73,7 +74,7 @@ public class CloudStorageUnitTest {
 	 */
 	@Test
 	public void testUpdateApplicationAfterDelete() {
-		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
+		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		assertTrue(storage.deleteApplication(app));
 		CollegeApplicationTaskModel task = new CollegeApplicationTaskModel("myTask");
 		Calendar calendar = new GregorianCalendar(2015,9,16);
@@ -88,12 +89,12 @@ public class CloudStorageUnitTest {
 	 */
 	@Test
 	public void testAddApplication() {
-		CollegeApplicationModel app1 = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
-		CollegeApplicationModel app2 = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
+		CollegeApplicationModel app1 = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
+		CollegeApplicationModel app2 = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		appsAdded.add(app1);
 		appsAdded.add(app2);
 
-		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
+		List<CollegeApplicationModel> apps = storage.getApplications();
 		assertTrue(apps.contains(app1));
 		assertTrue(apps.contains(app2));
 	}
@@ -103,10 +104,10 @@ public class CloudStorageUnitTest {
 	 */
 	@Test
 	public void testDeleteApplication() {
-		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.GetCategory("match"), "alex");
+		CollegeApplicationModel app = storage.addApplication("testUniversity", CollegeApplicationCategoryModel.getCategory("match"), "alex");
 		boolean deleted = storage.deleteApplication(app);
 		assertTrue(deleted);
-		ArrayList<CollegeApplicationModel> apps = storage.getApplications();
+		List<CollegeApplicationModel> apps = storage.getApplications();
 		assertFalse(apps.contains(app));
 	}
 

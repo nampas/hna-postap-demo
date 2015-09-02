@@ -1,7 +1,7 @@
 package com.holynamespostap.demo.route;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
+import com.holynamespostap.demo.dataModel.CollegeApplicationTaskModel;
 import com.holynamespostap.demo.storage.StorageFactory;
 import com.holynamespostap.demo.util.AppSettings;
 import com.holynamespostap.demo.util.HtmlUtil;
-import com.holynamespostap.demo.util.HttpRequestUtil;
+import com.holynamespostap.demo.util.HttpUtil;
 
 /**
  * Servlet implementation class
@@ -43,7 +44,7 @@ public class Index extends HttpServlet {
 						HttpServletResponse response) throws ServletException,
 															IOException
 	{
-    	String username = HttpRequestUtil.extractUsernameFromRequest(request);
+    	String username = HttpUtil.extractUsernameFromRequest(request);
 
 		StringBuilder strBuilder = new StringBuilder();
 
@@ -69,9 +70,6 @@ public class Index extends HttpServlet {
 		// Include the form for adding applications
 		strBuilder.append(htmlUtil.buildApplicationForm(username));
 
-		// And the form for adding application tasks
-		strBuilder.append(htmlUtil.buildTaskForm(username));
-
 		// Don't forget to close all the tags that were opened!
 		strBuilder.append("</body>");
 		strBuilder.append("</html>");
@@ -87,11 +85,19 @@ public class Index extends HttpServlet {
 	 */
 	private String buildApplicationList(String username) {
 		StringBuilder builder = new StringBuilder();
-		ArrayList<CollegeApplicationModel> applications
+
+		List<CollegeApplicationModel> applications
 						= StorageFactory.getInstance().getApplications(username);
 
 		for(CollegeApplicationModel application : applications){
 			builder.append(application.renderToHtml());
+			builder.append("<h3>Tasks</h3>");
+			for(CollegeApplicationTaskModel task : application.getTasks()) {
+				builder.append(task.renderToHtml());
+			}
+
+			// And the form for adding application tasks
+			builder.append(htmlUtil.buildTaskForm(username, application.getCollegeName()));
 		}
 		return builder.toString();
 	}
