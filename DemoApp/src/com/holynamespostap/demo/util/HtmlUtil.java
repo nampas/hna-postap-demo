@@ -29,10 +29,12 @@ public class HtmlUtil {
 	 */
 	public String buildBodyHeader(String userName) {
 		return new StringBuilder()
-			.append("<h1>HNA College Application Tool</h1>")
-			.append("<p align=\"right\">")
-				.append("You are logged in as <strong>" + userName + "</strong>")
-			.append("</p>")
+			.append("<div class=\"header\">")
+				.append("<p class=\"username\">")
+					.append("You are logged in as <strong>" + userName + "</strong>")
+				.append("</p>")
+				.append("<h1>HNA College Application Tool</h1>")
+			.append("</div>")
 			.toString();
 	}
 
@@ -61,22 +63,20 @@ public class HtmlUtil {
 	 */
 	public String buildApplicationForm(String username) {
 		return new StringBuilder()
-			.append("<h3>Please enter a new college application</h3>")
-			.append("<form action=\"/college-application/" + username + "\" method=\"post\">")
-				.append("College Name: <input type=\"text\" name=\"collegeName\">")
-				.append("<br>")
-				.append("School Type: <select name=\"schoolType\">")
-					.append("<option value=\"Safety\">Safety</option>")
-					.append("<option value=\"Match\">Match</option>")
-					.append("<option value=\"Reach\">Reach</option>")
-				.append("</select>")
-				.append("<br>")
-				.append("Admitted: <input type=\"checkbox\" name=\"admitted\">")
-				.append("<br>")
-				.append("Due Date: <input type=\"text\" name=\"dueDate\">")
-				.append("<br>")
-				.append("<input type=\"submit\">")
-			.append("</form>")
+			.append("<div class=\"application-form content-padding\">")
+				.append("<h3>Please enter a new college application</h3>")
+				.append("<form action=\"/college-application/" + username + "\" method=\"post\">")
+					.append("College Name: <input type=\"text\" name=\"collegeName\">")
+					.append("School Type: <select name=\"schoolType\">")
+						.append("<option value=\"Safety\">Safety</option>")
+						.append("<option value=\"Match\">Match</option>")
+						.append("<option value=\"Reach\">Reach</option>")
+					.append("</select>")
+					.append("Admitted: <input type=\"checkbox\" name=\"admitted\">")
+					.append("<br>")
+					.append("<input class=\"btn btn-primary\" type=\"submit\">")
+				.append("</form>")
+			.append("</div>")
 			.toString();
 	}
 
@@ -99,13 +99,12 @@ public class HtmlUtil {
 							+ "?schoolName=" + schoolName;
 
 		return new StringBuilder()
-			.append("<h3>Please Input Task details...</h3>")
+			.append("<h4>Please Input Task details...</h4>")
 			.append("<form action=\"" + postUrl + "\" method=\"post\">")
 				.append("Task: <input type=\"text\" name=\"taskInfo\">")
-				.append("<br>")
 				.append("Due Date: <input type=\"text\" name=\"dueDate\">")
 				.append("<br>")
-				.append("<input type=\"submit\">")
+				.append("<input class=\"btn btn-primary\" type=\"submit\">")
 			.append("</form>")
 			.toString();
 	}

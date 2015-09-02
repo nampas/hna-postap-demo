@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
+import com.holynamespostap.demo.dataModel.CollegeApplicationTaskModel;
 import com.holynamespostap.demo.storage.StorageFactory;
+import com.holynamespostap.demo.storage.StorageInterface;
 import com.holynamespostap.demo.util.AppSettings;
 import com.holynamespostap.demo.util.HtmlUtil;
 import com.holynamespostap.demo.util.HttpUtil;
@@ -63,7 +65,15 @@ public class CollegeApplicationTaskRoute extends HttpServlet {
     	String schoolName = request.getParameter("schoolName");
     	for(CollegeApplicationModel app : applications) {
     		if(app.getCollegeName().equalsIgnoreCase(schoolName)) {
+    			String name = request.getParameter("taskInfo");
+    			String dueDate = request.getParameter("dueDate");
 
+    			app.addTask(new CollegeApplicationTaskModel(name, dueDate));
+
+    			StorageInterface storage = StorageFactory.getInstance();
+    			storage.updateApplication(app);
+
+    			break;
     		}
     	}
 

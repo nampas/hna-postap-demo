@@ -1,3 +1,28 @@
-h1 {
-	color: blue;
+.header {
+	background-color: #5CB85C;
+	padding: 10px;
+}
+
+.username {
+	float: right;
+}
+
+.content-padding {
+	padding: 10px;
+}
+
+.inline {
+	display: inline-block;
+}
+
+form > * {
+	margin-right: 10px;
+}
+
+form > .btn {
+	margin-top: 10px;
+}
+
+.application > .tasks {
+	padding: 10px;
 }

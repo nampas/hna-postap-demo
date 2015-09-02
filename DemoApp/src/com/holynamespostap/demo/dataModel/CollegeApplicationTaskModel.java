@@ -1,7 +1,5 @@
 package com.holynamespostap.demo.dataModel;
 
-import java.util.Date;
-
 /**
  * Represents a task for a college application
  *
@@ -10,13 +8,18 @@ import java.util.Date;
  */
 public class CollegeApplicationTaskModel extends AbstractDataModel {
 
-	private Date dueDate;
-	private Date completedDate;
+	private String dueDate;
+	private String completedDate;
 	private String name;
 	private String note;
 
 	public CollegeApplicationTaskModel(String name){
 		this.setName(name);
+	}
+
+	public CollegeApplicationTaskModel(String name, String dueDate){
+		this.setName(name);
+		this.setDueDate(dueDate);
 	}
 
 	/**
@@ -50,28 +53,28 @@ public class CollegeApplicationTaskModel extends AbstractDataModel {
 	/**
 	 * @return the completedDate
 	 */
-	public Date getCompletedDate() {
+	public String getCompletedDate() {
 		return completedDate;
 	}
 
 	/**
 	 * @param completedDate the completedDate to set
 	 */
-	public void setCompletedDate(Date completedDate) {
+	public void setCompletedDate(String completedDate) {
 		this.completedDate = completedDate;
 	}
 
 	/**
 	 * @return the dueDate
 	 */
-	public Date getDueDate() {
+	public String getDueDate() {
 		return dueDate;
 	}
 
 	/**
 	 * @param dueDate the dueDate to set
 	 */
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
 
@@ -79,8 +82,11 @@ public class CollegeApplicationTaskModel extends AbstractDataModel {
 	public String renderToHtml() {
 		StringBuilder strBuilder = new StringBuilder()
 			.append("<h4>" + name + "</h4>")
-			.append("<p>Due Date: " + dueDate.toString() + "</p>")
-			.append("<p>Completed Date: " + completedDate.toString() + "</p>");
+			.append("<p>Due Date: " + dueDate.toString() + "</p>");
+
+		if(completedDate != null) {
+			strBuilder.append("<p>Completed Date: " + completedDate.toString() + "</p>");
+		}
 
 		if(note != null && !note.isEmpty()) {
 			strBuilder.append("<p>" + note + "</p>");

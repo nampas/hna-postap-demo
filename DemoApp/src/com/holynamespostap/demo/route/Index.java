@@ -64,11 +64,11 @@ public class Index extends HttpServlet {
 		// page
 		strBuilder.append(htmlUtil.buildBodyHeader(username));
 
-		// not sure if this belongs here or somewhere else
-		strBuilder.append(buildApplicationList(username));
-
 		// Include the form for adding applications
 		strBuilder.append(htmlUtil.buildApplicationForm(username));
+
+		// not sure if this belongs here or somewhere else
+		strBuilder.append(buildApplicationList(username));
 
 		// Don't forget to close all the tags that were opened!
 		strBuilder.append("</body>");
@@ -90,15 +90,20 @@ public class Index extends HttpServlet {
 						= StorageFactory.getInstance().getApplications(username);
 
 		for(CollegeApplicationModel application : applications){
-			builder.append(application.renderToHtml());
-			builder.append("<h3>Tasks</h3>");
+			builder.append("<div class=\"application content-padding\">")
+					.append(application.renderToHtml())
+					.append("<div class=\"tasks\">")
+						.append("<h4>Tasks</h4>");
 			for(CollegeApplicationTaskModel task : application.getTasks()) {
 				builder.append(task.renderToHtml());
 			}
 
 			// And the form for adding application tasks
-			builder.append(htmlUtil.buildTaskForm(username, application.getCollegeName()));
+			builder.append(htmlUtil.buildTaskForm(username, application.getCollegeName()))
+					.append("</div>") // close the tasks div
+					.append("</div>"); // close the application div
 		}
+
 		return builder.toString();
 	}
 
