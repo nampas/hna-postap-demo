@@ -6,6 +6,7 @@ package com.holynamespostap.demo.storage;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
 import com.holynamespostap.demo.dataModel.CollegeApplicationCategoryModel;
 import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
 import com.microsoft.azure.documentdb.ConnectionPolicy;

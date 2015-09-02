@@ -15,7 +15,7 @@ import com.holynamespostap.demo.util.HtmlUtil;
 /**
  * Servlet implementation class
  */
-@WebServlet("/college-application-task")
+@WebServlet("/college-application-task/*")
 public class CollegeApplicationTaskRoute extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

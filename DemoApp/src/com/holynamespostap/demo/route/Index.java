@@ -13,11 +13,12 @@ import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
 import com.holynamespostap.demo.storage.StorageFactory;
 import com.holynamespostap.demo.util.AppSettings;
 import com.holynamespostap.demo.util.HtmlUtil;
+import com.holynamespostap.demo.util.HttpRequestUtil;
 
 /**
  * Servlet implementation class
  */
-@WebServlet("/index")
+@WebServlet("/user/*")
 public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -42,7 +43,7 @@ public class Index extends HttpServlet {
 						HttpServletResponse response) throws ServletException,
 															IOException
 	{
-    	String username = "tealsk12";
+    	String username = HttpRequestUtil.extractUsernameFromRequest(request);
 
 		StringBuilder strBuilder = new StringBuilder();
 
@@ -63,7 +64,7 @@ public class Index extends HttpServlet {
 		strBuilder.append(htmlUtil.buildBodyHeader(username));
 
 		// not sure if this belongs here or somewhere else
-		strBuilder.append(this.buildApplicationList());
+		strBuilder.append(buildApplicationList(username));
 
 		// Include the form for adding applications
 		strBuilder.append(htmlUtil.buildApplicationForm(username));
@@ -84,9 +85,11 @@ public class Index extends HttpServlet {
 	 *
 	 * @return application list HTML
 	 */
-	private String buildApplicationList() {
+	private String buildApplicationList(String username) {
 		StringBuilder builder = new StringBuilder();
-		ArrayList<CollegeApplicationModel> applications = StorageFactory.getInstance().getApplications();
+		ArrayList<CollegeApplicationModel> applications
+						= StorageFactory.getInstance().getApplications(username);
+
 		for(CollegeApplicationModel application : applications){
 			builder.append(application.renderToHtml());
 		}

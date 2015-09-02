@@ -2,6 +2,9 @@ package com.holynamespostap.demo.util;
 
 public class HtmlUtil {
 
+	private static final String BOOSTRAP_CSS_URL
+		= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
+
 	/**
 	 * Renders out the HTML head. Several things to note:
 	 * TODO explain what the <title> tag does
@@ -11,6 +14,7 @@ public class HtmlUtil {
 		return new StringBuilder()
 			.append("<head>")
 				.append("<title>HNA College Application Tool</title>")
+				.append("<link rel=\"stylesheet\" href=\"" + BOOSTRAP_CSS_URL + "\">")
 			.append("</head")
 			.toString();
 	}
@@ -55,7 +59,7 @@ public class HtmlUtil {
 	public String buildApplicationForm(String username) {
 		return new StringBuilder()
 			.append("<h3>Please enter a new college application</h3>")
-			.append("<form action=\"/college-application\" method=\"post\">")
+			.append("<form action=\"/college-application/" + username + "\" method=\"post\">")
 				.append("College Name: <input type=\"text\" name=\"collegeName\">")
 				.append("<br>")
 				.append("School Type: <select name=\"schoolType\">")
@@ -77,7 +81,7 @@ public class HtmlUtil {
 	 * Renders out the task form, which looks like:
 	 *
 	 * 	<h3>Please Input Task details...</h3>
-	 * 	<form action="/college-application-task" method="post">
+	 * 	<form action="/college-application-task/{username}" method="post">
 	 * 		Task: <input type="text" name="TaskInfo">
 	 * 		<br>
 	 * 		Due Date: <input type="text" name="DueDate">
@@ -90,7 +94,7 @@ public class HtmlUtil {
 	public String buildTaskForm(String username) {
 		return new StringBuilder()
 			.append("<h3>Please Input Task details...</h3>")
-			.append("<form action=\"/college-application-task\" method=\"post\">")
+			.append("<form action=\"/college-application-task/" + username + "\" method=\"post\">")
 				.append("Task: <input type=\"text\" name=\"taskInfo\">")
 				.append("<br>")
 				.append("Due Date: <input type=\"text\" name=\"dueDate\">")

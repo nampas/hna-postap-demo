@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.holynamespostap.demo.storage;
 
@@ -13,17 +13,17 @@ import com.holynamespostap.demo.dataModel.CollegeApplicationModel;
  *
  */
 public class MemoryStorage implements StorageInterface {
-	
+
 	private ArrayList<CollegeApplicationModel> applications = new ArrayList<CollegeApplicationModel>();
-	
+
 	@Override
 	public ArrayList<CollegeApplicationModel> getApplications() {
 		return this.applications;
 	}
-	
+
 	@Override
 	public ArrayList<CollegeApplicationModel> getApplications(String username) {
-		
+
 		ArrayList<CollegeApplicationModel> filteredApp = new ArrayList<CollegeApplicationModel>();
 		for(int i = 0; i < this.applications.size(); i++)
 		{
@@ -31,7 +31,7 @@ public class MemoryStorage implements StorageInterface {
 				filteredApp.add(applications.get(i));
 			}
 		}
-		
+
 		return filteredApp;
 	}
 
@@ -50,7 +50,7 @@ public class MemoryStorage implements StorageInterface {
 	@Override
 	public CollegeApplicationModel addApplication(String collegeName, CollegeApplicationCategoryModel category,
 			String username) {
-		
+
 		String id = Integer.toString(this.applications.size());
 		CollegeApplicationModel application = new CollegeApplicationModel(collegeName, category, username, id);
 		this.applications.add(application);

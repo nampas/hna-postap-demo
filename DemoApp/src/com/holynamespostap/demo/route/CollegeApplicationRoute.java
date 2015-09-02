@@ -13,11 +13,12 @@ import com.holynamespostap.demo.storage.StorageFactory;
 import com.holynamespostap.demo.storage.StorageInterface;
 import com.holynamespostap.demo.util.AppSettings;
 import com.holynamespostap.demo.util.HtmlUtil;
+import com.holynamespostap.demo.util.HttpRequestUtil;
 
 /**
  * Servlet implementation class
  */
-@WebServlet("/college-application")
+@WebServlet("/college-application/*")
 public class CollegeApplicationRoute extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -60,7 +61,8 @@ public class CollegeApplicationRoute extends HttpServlet {
 		String schoolType = request.getParameter("schoolType");
 		String addmitted = request.getParameter("admitted");
 		String dueDate = request.getParameter("dueDate");
-		String username = request.getParameter("username");
+
+		String username = HttpRequestUtil.extractUsernameFromRequest(request);
 
 		// Instantiate a new data model with the information from the request
 //		CollegeApplicationModel applicatioModel = new CollegeApplicationModel(
@@ -76,7 +78,9 @@ public class CollegeApplicationRoute extends HttpServlet {
 			username
 		);
 
-		// TODO redirect
+		// Redirect back to the main page. The client will reload and render
+		// this user's new content
+		response.sendRedirect("/user/" + username);
 	}
 
 
