@@ -71,7 +71,12 @@ public class CollegeApplicationTaskRoute extends HttpServlet {
     			app.addTask(new CollegeApplicationTaskModel(name, dueDate));
 
     			StorageInterface storage = StorageFactory.getInstance();
-    			storage.updateApplication(app);
+    			if(storage.updateApplication(app)){
+    				System.out.println("updateApplication succeeded");
+    			}
+    			else{
+    				System.out.println("updateApplication failed");
+    			}
 
     			break;
     		}

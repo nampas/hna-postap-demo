@@ -58,7 +58,7 @@ public class CloudStorageUnitTest {
 		appsAdded.add(app);
 		CollegeApplicationTaskModel task = new CollegeApplicationTaskModel("myTask");
 		Calendar calendar = new GregorianCalendar(2015,9,16);
-		task.setDueDate(calendar.getTime());
+		task.setDueDate(calendar.getTime().toString());
 		app.addTask(task);
 		boolean updated = storage.updateApplication(app);
 		assertTrue(updated);
@@ -78,7 +78,7 @@ public class CloudStorageUnitTest {
 		assertTrue(storage.deleteApplication(app));
 		CollegeApplicationTaskModel task = new CollegeApplicationTaskModel("myTask");
 		Calendar calendar = new GregorianCalendar(2015,9,16);
-		task.setDueDate(calendar.getTime());
+		task.setDueDate(calendar.getTime().toString());
 		app.addTask(task);
 		boolean updated = storage.updateApplication(app);
 		assertFalse(updated);

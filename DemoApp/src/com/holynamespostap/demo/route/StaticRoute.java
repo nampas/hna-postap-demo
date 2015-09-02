@@ -31,7 +31,7 @@ public class StaticRoute extends HttpServlet {
 	    // Get the absolute path of the image
 	    ServletContext sc = getServletContext();
 
-	    String filename = sc.getRealPath("../../../../../../../hna-postap-demo/DemoApp/res/" + requestUrl);
+	    String filename = sc.getRealPath("./" + requestUrl);
 
 	    // Get the MIME type of the image
 	    String mimeType = sc.getMimeType(filename);
