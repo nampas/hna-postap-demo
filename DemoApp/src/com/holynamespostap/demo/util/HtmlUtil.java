@@ -5,6 +5,8 @@ public class HtmlUtil {
 	private static final String BOOSTRAP_CSS_URL
 		= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
 
+	private static final String CUSTOM_CSS_URL = "/static/index.css";
+
 	/**
 	 * Renders out the HTML head. Several things to note:
 	 * TODO explain what the <title> tag does
@@ -15,6 +17,7 @@ public class HtmlUtil {
 			.append("<head>")
 				.append("<title>HNA College Application Tool</title>")
 				.append("<link rel=\"stylesheet\" href=\"" + BOOSTRAP_CSS_URL + "\">")
+				.append("<link rel=\"stylesheet\" href=\"" + CUSTOM_CSS_URL + "\">")
 			.append("</head")
 			.toString();
 	}

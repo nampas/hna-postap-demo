@@ -76,9 +76,4 @@ public class CollegeApplicationRoute extends HttpServlet {
 		// this user's new content
 		HttpUtil.redirectToIndex(response, username);
 	}
-
-
-
-
-
 }
